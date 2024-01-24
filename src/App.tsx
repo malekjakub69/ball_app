@@ -24,25 +24,25 @@ const cards: ICard[] = [
   },
   {
     cardPicture: "/pivo.png",
-    description: "!!!\nVyhráváš\npivo\n!!!",
+    description: "!!! Vyhráváš pivo !!!",
     name: "Pivo",
     probability: 0.34
   },
   {
     cardPicture: "/barel.png",
-    description: "!!!\nVyhráváš\n2x pivo\n!!!",
+    description: "!!! Vyhráváš 2x pivo !!!",
     name: "Barel",
     probability: 0.07
   },
   {
     cardPicture: "/opetpalba.png",
-    description: "Obrací efekt karty bang na útočníka.\n(P.S. vytáhni až na baru)",
+    description: "Obrací efekt karty bang na útočníka. (P.S. vytáhni až na baru)",
     name: "Opětovaná palba",
     probability: 0.17
   },
   {
     cardPicture: "/cutora.png",
-    description: "!!!\nVyhráváš\nPremium panák\n!!!",
+    description: "!!! Vyhráváš Premium panák !!!",
     name: "Čutora",
     probability: 0.07
   },
