@@ -1,14 +1,15 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { ICard } from "./App";
 import './Card.css';
 
 interface IProps {
     card: ICard
+    isFlipped: boolean
+    setIsFlipped: (isFlipped: boolean) => void
 }
 
 
-export const Card: FC<IProps> = ({ card }) => {
-    const [isFlipped, setIsFlipped] = useState(false);
+export const Card: FC<IProps> = ({ card, isFlipped,setIsFlipped }) => {
 
     const handleFlip = () => {
       setIsFlipped(!isFlipped);
@@ -29,7 +30,8 @@ export const Card: FC<IProps> = ({ card }) => {
                 </div>
                 <div onClick={handleFlip} className="flip-card-back">
                     <div className="card-content">
-                        {card.description}
+                        <h1>{card.name}</h1>
+                        <span>{card.description}</span>
                     </div>
                 </div>
             </div>

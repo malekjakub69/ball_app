@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  margin-top: 4px;
   justify-content: center;
 
   margin: auto;
@@ -53,4 +54,15 @@
 
 .card-content {
   text-align: center;
+  padding: 5px;
+}
+
+.card-content h1 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.card-content span{
+  font-size: 24px;
+  font-weight: 600;
 }
