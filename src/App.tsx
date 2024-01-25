@@ -14,7 +14,7 @@ export type ICard = {
 const cards: ICard[] = [
   {
     cardPicture: "/bang.png",
-    description: "Schovej si kartu bang. Oběť karty dostane pivo, které musí vyexovat na baru.",
+    description: "Schovej si kartu bang. Oběť karty dostane malé pivo, které musí vyexovat na baru.",
     name: "Bang",
     probability: 0.17
   },
