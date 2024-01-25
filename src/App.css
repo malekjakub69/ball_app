@@ -11,6 +11,8 @@ button.nextBtn {
   border-radius: 12px;
 }
 
-button.percentile{
-  
+button.nextBtn:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
 }

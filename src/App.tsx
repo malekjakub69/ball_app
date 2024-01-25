@@ -60,6 +60,7 @@ const cards: ICard[] = [
 function App() {
 
   const [randomCard, setRandomCard] = useState<ICard>(cards[Math.round(Math.random()*(cards.length-1))])
+  const [shake, setShake] = useState<boolean>(false);
   const [isFlipped, setIsFlipped] = useState(false);
   
   const probabilityCards = useMemo(() => {
@@ -72,40 +73,45 @@ function App() {
     toReturn.sort(() => (Math.random() > .5) ? 1 : -1)
     return toReturn;
   }, [])
-
-  const startEffect = (callback: () => void) => {
+  
+  const startEffect = () => {
     setIsFlipped(false);
     let intervalId:number;
-    let delay = 40; // Počáteční rychlost procházení karet
+  
+    let cardCount = 0;
+    let time = 100
+    const maxCardCount = 10; // Maximální počet karet, které chcete vygenerovat
 
-    const changeCard = () => {
-      setRandomCard(cards[Math.round(Math.random()*(cards.length-1))]);
-      delay += delay*0.15; // Postupné zpomalení
-      intervalId = setTimeout(changeCard, delay);
+    const generateCards = () => {
+      if (cardCount < maxCardCount) {
+        setRandomCard(cards[Math.round(Math.random()*(cards.length-1))]);
+        cardCount++;
+        setTimeout(generateCards, time); // Pauza mezi generováním karet v milisekundách
+        time += time * 0.25; // Zrychlování generování karet
+      } else {
+        clearTimeout(intervalId); // Zastavení procházení karet
+        const newRandomCard = probabilityCards[Math.round(Math.random()*(probabilityCards.length-1))];
+        setRandomCard(newRandomCard);
+        addStats(newRandomCard.name);
+        setShake(false);
+      }
     };
-
-    changeCard();
-
-    return setTimeout(() => {
-      clearTimeout(intervalId); // Zastavení procházení karet // Náhodný výběr karty
-      callback();
-    }, 4000); // Doba trvání efektu
+  
+    generateCards();
   };
+  
 
   const generateCard = () => {
-    startEffect(() => { // předat setRandomCard jako callback funkci
-      const newRandomCard = probabilityCards[Math.round(Math.random()*(probabilityCards.length-1))];
-      setRandomCard(newRandomCard);
-      addStats(newRandomCard.name);
-    });
+    setShake(true);
+    startEffect();
   }
 
 
   return (
     <>
       <div className="space"></div>
-      <Card isFlipped={isFlipped} setIsFlipped={setIsFlipped} card={randomCard} />
-      <button className="nextBtn" onClick={generateCard}>Generovat další kartu</button>
+      <Card shake={shake} isFlipped={isFlipped} setIsFlipped={setIsFlipped} card={randomCard} />
+      <button disabled={shake} className="nextBtn" onClick={generateCard}>Generovat další kartu</button>
       {false && <button className="percentile" onClick={() => showPercentile(cards, probabilityCards)}>Show percentile</button>}
     </>
   )

@@ -6,13 +6,14 @@ interface IProps {
     card: ICard
     isFlipped: boolean
     setIsFlipped: (isFlipped: boolean) => void
+    shake: boolean
 }
 
 
-export const Card: FC<IProps> = ({ card, isFlipped,setIsFlipped }) => {
+export const Card: FC<IProps> = ({ card, isFlipped,setIsFlipped, shake }) => {
 
     const handleFlip = () => {
-      setIsFlipped(!isFlipped);
+      if (!shake) setIsFlipped(!isFlipped);
     };
 
     return (
